@@ -3,14 +3,14 @@
 
 import fs from "fs";
 import cheerio from "cheerio";
-import { Command } from "commander";
+import { Command, Option } from "commander";
 
 const program = new Command()
   .version("0.0.1")
   .option("-i, --instance [instance]", "Jira Instance")
   .option("-p, --project [project]", "Jira Project")
-  .option("-s, --start [start]", "Start Issue")
-  .option("-e, --end [end]", "End Issue")
+  .addOption(new Option("-s, --start <number>", "Start Issue").preset(1).argParser(parseInt))
+  .addOption(new Option("-e, --end <number>", "End Issue").preset(1).argParser(parseInt))
   .option("-o, --output [output]", "Output File")
   .parse(process.argv);
 
@@ -27,6 +27,17 @@ if (!project || !start || !end || !output || !instance) {
   console.log("Missing required arguments");
   process.exit(1);
 }
+
+if (start > end) {
+  console.log("Start issue must be less than end issue");
+  process.exit(1);
+}
+
+// on exit, write out what we have
+process.on("exit", function () {
+  console.log("Caught exit signal, writing to file");
+  writeCSV();
+});
 
 // on cancel, write out what we have
 process.on("SIGINT", function () {
