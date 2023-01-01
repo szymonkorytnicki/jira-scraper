@@ -1,0 +1,26 @@
+{
+  "name": "jira-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szymonkorytnicki/jira-scraper.git"
+  },
+  "engines": {
+    "node": ">= 19.3.0"
+  },
+  "author": "skorytnicki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szymonkorytnicki/jira-scraper/issues"
+  },
+  "homepage": "https://github.com/szymonkorytnicki/jira-scraper#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "commander": "^9.4.1"
+  }
+}
